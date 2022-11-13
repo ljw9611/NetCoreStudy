@@ -3,16 +3,12 @@ using NET_Core_Study; // 생성한 미들웨어 namespace using
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-app.Use(async (context, next) =>
+((IApplicationBuilder)app).Map("/branch", branch =>
 {
-    if (context.Request.Path == "/short")
+    branch.Run(async (HttpContext context) =>
     {
-        await context.Response.WriteAsync("Request short-circuited");
-    }
-    else
-    {
-        await next();
-    }
+        await context.Response.WriteAsync("Branch middleware");
+    });
 });
 
 app.UseMiddleware<Middleware>(); // 미들웨어 클래스 추가 / Middleware는 클래스명
