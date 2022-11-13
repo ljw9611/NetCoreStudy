@@ -3,16 +3,16 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:39063",
-      "sslPort": 44358
+      "applicationUrl": "http://localhost:49335",
+      "sslPort": 44374
     }
   },
   "profiles": {
-    "NetCoreStudy": {
+    "NET_Core_Study": { // Project Name
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
-      "applicationUrl": "https://localhost:7176;http://localhost:5225",
+      "launchBrowser": false, // false로 설정
+      "applicationUrl": "https://localhost:7224;http://localhost:3000", //http 포트 3000 변경
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
