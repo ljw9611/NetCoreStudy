@@ -1,16 +1,9 @@
+using NET_Core_Study; // 생성한 미들웨어 namespace using
+
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-//추가한 코드
-app.Use(async (context, next) => //HttpContext Class의 context 매개변수
-{
-    if (context.Request.Method == HttpMethods.Get && context.Request.Query["custom"] == "true")
-    {
-        context.Response.ContentType = "text/plain";
-        await context.Response.WriteAsync("Custom Middleware\n"); //응답 본문 내용 작성
-    }
-    await next();
-});
+app.UseMiddleware<Middleware>(); // 미들웨어 클래스 추가 / Middleware는 클래스명
 
 app.MapGet("/", () => "Hello World!12");
 
