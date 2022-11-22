@@ -1,14 +1,20 @@
+using Microsoft.Extensions.Options;
 using NET_Core_Study; // 생성한 미들웨어 namespace using
+using NetCoreStudy;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<FruitOptions>(options =>
+{
+    options.Name = "watermelon";
+});
+
 var app = builder.Build();
 
-((IApplicationBuilder)app).Map("/branch", branch =>
+app.MapGet("/fruit", async(HttpContext context, IOptions<FruitOptions> FruitOptions) =>
 {
-    branch.Run(async (HttpContext context) =>
-    {
-        await context.Response.WriteAsync("Branch middleware");
-    });
+    FruitOptions options = FruitOptions.Value;
+    await context.Response.WriteAsync($"{options.Name}, {options.Color}");
 });
 
 app.UseMiddleware<Middleware>(); // 미들웨어 클래스 추가 / Middleware는 클래스명
