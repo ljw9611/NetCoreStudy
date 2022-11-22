@@ -11,13 +11,13 @@ builder.Services.Configure<FruitOptions>(options =>
 
 var app = builder.Build();
 
-app.MapGet("/fruit", async(HttpContext context, IOptions<FruitOptions> FruitOptions) =>
-{
-    FruitOptions options = FruitOptions.Value;
-    await context.Response.WriteAsync($"{options.Name}, {options.Color}");
-});
+//app.MapGet("/fruit", async(HttpContext context, IOptions<FruitOptions> FruitOptions) =>
+//{
+//    FruitOptions options = FruitOptions.Value;
+//    await context.Response.WriteAsync($"{options.Name}, {options.Color}");
+//});
 
-app.UseMiddleware<Middleware>(); // 미들웨어 클래스 추가 / Middleware는 클래스명
+app.UseMiddleware<FruitMiddleware>(); // 미들웨어 클래스 추가 / Middleware는 클래스명
 
 app.MapGet("/", () => "Hello World!12");
 
